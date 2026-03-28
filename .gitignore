@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Maven and build outputs
 target/
 build/
@@ -13,13 +14,36 @@ out/
 *.ipr
 
 # Eclipse / STS
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings/
+=======
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+.kotlin
+
+### IntelliJ IDEA ###
+.idea/modules.xml
+
+# NetBeans
+build/
+out/
+
+!.mvn/wrapper/maven-wrapper.jar
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Eclipse / STS
 .springBeans
 .sts4-cache
+
+### NetBeans ###
+/nbbuild/
+/dist/
+/nbdist/
 
 # NetBeans
 nbproject/private/
@@ -35,3 +59,4 @@ nbdist/
 .DS_Store
 Thumbs.db
 *.log
+
