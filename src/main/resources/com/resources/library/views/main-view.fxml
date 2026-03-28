@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="453.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.resources.library.controllers.MainController">
+   <children>
+      <TableView fx:id="tableView" prefHeight="200.0" prefWidth="449.0">
+        <columns>
+          <TableColumn fx:id="isbnColumn" prefWidth="75.0" text="ISBN" />
+          <TableColumn fx:id="titleColumn" prefWidth="75.0" text="Title" />
+            <TableColumn fx:id="authorColumn" prefWidth="75.0" text="Author" />
+            <TableColumn fx:id="yearColumn" prefWidth="75.0" text="Year Published" />
+            <TableColumn fx:id="genreColumn" prefWidth="75.0" text="Genre" />
+            <TableColumn fx:id="availableColumn" prefWidth="75.0" text="Available" />
+        </columns>
+      </TableView>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" text="Add Book" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
