@@ -6,4 +6,8 @@ module com.resources.library {
 
     opens com.resources.library to javafx.fxml;
     exports com.resources.library;
+
+    opens com.resources.library.controllers to javafx.fxml;
+    exports com.resources.library.controllers;
+
 }
