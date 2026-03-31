@@ -66,6 +66,7 @@ public class MainController {
             stage.showAndWait();
 
             bookList.setAll(bookService.getAllBooks());
+            tableView.refresh();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -78,6 +79,7 @@ public class MainController {
             Parent root = loader.load();
 
             AddController addController = loader.getController();
+            addController.setBookService(bookService);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
@@ -85,6 +87,7 @@ public class MainController {
             stage.showAndWait();
 
             bookList.setAll(bookService.getAllBooks());
+            tableView.refresh();
         } catch (IOException e) {
             e.printStackTrace();
         }

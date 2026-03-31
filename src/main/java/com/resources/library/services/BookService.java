@@ -73,6 +73,11 @@ public class BookService {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Year published must be a valid 4-digit year.");
         }
+
+        if (book.getGenre() == null){
+            throw new IllegalArgumentException("Genre must be selected.");
+        }
+
     }
 
 

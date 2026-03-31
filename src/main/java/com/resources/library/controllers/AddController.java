@@ -28,7 +28,7 @@ public class AddController {
     @FXML
     private CheckBox chkAvailable;
 
-    BookService service = new BookService();
+    BookService service;
 
 
     String[] genreOptions = {"Science Fiction"};
@@ -47,6 +47,7 @@ public class AddController {
             boolean available = chkAvailable.isSelected();
 
             service.addBook(isbn, title, author, yearPublished, genre, available);
+
             Stage stage = (Stage) txtIsbn.getScene().getWindow();
             stage.close();
 
@@ -61,6 +62,10 @@ public class AddController {
     public void onCancelAdd(){
         Stage stage = (Stage) txtIsbn.getScene().getWindow();
         stage.close();
+    }
+
+    public void setBookService(BookService service){
+        this.service =  service;
     }
 
 }
