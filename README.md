@@ -84,8 +84,8 @@ Desde la carpeta `library`.
 
 ## Equipo 02
 
-- Alonso Caleb Astudillo Cuevas
-- Diego Sánchez Carteño
+- Alonso Caleb Astudillo Cuevas (eizybam)
+- Diego Sánchez Carteño (esfiio)
 
 ## Evidencias
 
