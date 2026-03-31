@@ -48,6 +48,7 @@ public class MainController {
 
         if (selectedBook == null){
             System.out.println("Select a book first");
+            return;
         }
 
 
@@ -63,6 +64,7 @@ public class MainController {
             stage.setTitle("Delete Book");
             stage.showAndWait();
 
+            bookList.setAll(bookService.getAllBooks());
         } catch (Exception e) {
             e.printStackTrace();
         }

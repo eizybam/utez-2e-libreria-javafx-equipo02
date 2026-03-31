@@ -48,6 +48,13 @@ public class BookService {
 
     }
 
+    public void deleteBook(Book book){
+        validateBook();
+
+        books.remove(book);
+        bookRepository.saveBooks(books);
+    }
+
     public void validateBook(){
 
     }
