@@ -19,10 +19,8 @@ public class BookRepository {
 
         File file = new File(FILE_PATH);
         if (!file.exists()){
-            System.out.println("NO EXISTE PTM");
             return books;
         }
-        System.out.println("SI EXISTE AHUEVO");
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))){
             String line;

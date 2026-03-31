@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.collections.ObservableList;
@@ -66,6 +67,24 @@ public class MainController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
+
+    @FXML
+    public void onAdd(){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/resources/library/views/add-view.fxml"));
+            Parent root = loader.load();
+
+            AddController addController = loader.getController();
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Add Book");
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
