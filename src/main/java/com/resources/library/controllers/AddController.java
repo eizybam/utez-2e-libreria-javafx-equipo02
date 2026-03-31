@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class AddController {
 
@@ -44,14 +45,22 @@ public class AddController {
             String yearPublished = txtYearPublished.getText();
             String genre = cbGenreFilter.getValue();
             boolean available = chkAvailable.isSelected();
-            
+
             service.addBook(isbn, title, author, yearPublished, genre, available);
+            Stage stage = (Stage) txtIsbn.getScene().getWindow();
+            stage.close();
 
         }
         catch(IllegalArgumentException e){
             System.out.println("Error adding book: " + e.getMessage());
         }
         
+    }
+
+    @FXML
+    public void onCancelAdd(){
+        Stage stage = (Stage) txtIsbn.getScene().getWindow();
+        stage.close();
     }
 
 }

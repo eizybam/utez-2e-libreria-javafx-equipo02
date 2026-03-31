@@ -51,13 +51,13 @@ public class BookService {
 
     }
 
-    private void validateBook(Book book){
+    private void validateBook(Book book) {
 
-        if (book.getIsbn().length() != 10){
+        if (book.getIsbn().length() != 10) {
             throw new IllegalArgumentException("ISBN must be 10 characters long");
         }
 
-        if (book.getTitle() == null || book.getTitle().isBlank() || book.getTitle().length() < 3){
+        if (book.getTitle() == null || book.getTitle().isBlank() || book.getTitle().length() < 3) {
             throw new IllegalArgumentException("Title must be at least 3 characters.");
         }
 
@@ -73,11 +73,11 @@ public class BookService {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Year published must be a valid 4-digit year.");
         }
-
+    }
 
 
     public void deleteBook(Book book){
-        validateBook();
+        validateBook(book);
 
         books.remove(book);
         bookRepository.saveBooks(books);

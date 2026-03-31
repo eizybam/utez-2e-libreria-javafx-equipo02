@@ -84,6 +84,7 @@ public class MainController {
             stage.setTitle("Add Book");
             stage.showAndWait();
 
+            bookList.setAll(bookService.getAllBooks());
         } catch (IOException e) {
             e.printStackTrace();
         }
