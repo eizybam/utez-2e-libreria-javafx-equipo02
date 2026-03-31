@@ -18,19 +18,22 @@ public class BookService {
         return books;
     }
 
-    public void addBook(Book book) {
-        validateBook();
-        if (findByIsbn(book.getIsbn()) != null){
-            throw new IllegalArgumentException("A book with this ISBN already exists.");
+    public void addBook(String isbn, String title, String author, String yearPublished, String genre, Boolean available) {
+
+        if (findByIsbn(isbn) != null){
+            throw new IllegalArgumentException("Book with this ISBN already exists");
         }
 
-        books.add(book);
+        Book bookToAdd = new Book(isbn, title, author, yearPublished, genre, available);
+        validateBook(bookToAdd);
+
+        books.add(bookToAdd);
         bookRepository.saveBooks(books);
 
     }
 
     public void updateBook(Book updatedBook){
-        validateBook();
+        validateBook(updatedBook);
 
         Book bookToUpdate = findByIsbn(updatedBook.getIsbn());
         if (bookToUpdate == null){
@@ -48,7 +51,31 @@ public class BookService {
 
     }
 
-    public void validateBook(){
+    private void validateBook(Book book){
+
+        if (book.getIsbn().length() != 10){
+            throw new IllegalArgumentException("ISBN must be 10 characters long");
+        }
+
+        if (book.getTitle() == null || book.getTitle().isBlank() || book.getTitle().length() < 3){
+            throw new IllegalArgumentException("Title must be at least 3 characters.");
+        }
+
+        if (book.getAuthor() == null || book.getAuthor().isBlank() || book.getAuthor().length() < 3) {
+            throw new IllegalArgumentException("Author must be at least 3 characters.");
+        }
+
+        try {
+            int yearPublished = Integer.parseInt(book.getYearPublished());
+            if (yearPublished < 1500 || yearPublished > 2026) {
+                throw new IllegalArgumentException("Year published must be between 1500 and the current year.");
+            }
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Year published must be a valid 4-digit year.");
+        }
+
+
+
 
     }
 
