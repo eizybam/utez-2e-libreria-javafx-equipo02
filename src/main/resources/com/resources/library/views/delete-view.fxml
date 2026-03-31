@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="129.0" prefWidth="316.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.resources.library.controllers.DeleteController">
+   <children>
+      <Label alignment="CENTER" prefHeight="17.0" prefWidth="630.0" text="Confirm Deletion" />
+      <HBox prefHeight="28.0" prefWidth="317.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="87.0" text="Selected ISBN:" />
+            <Label fx:id="lblSelectedIsbn" prefHeight="17.0" prefWidth="63.0" />
+         </children>
+      </HBox>
+      <HBox prefHeight="42.0" prefWidth="317.0">
+         <children>
+            <Label prefHeight="25.0" prefWidth="79.0" text="Retype ISBN:" />
+            <TextField prefHeight="25.0" prefWidth="151.0" />
+         </children>
+      </HBox>
+      <HBox prefHeight="20.0" prefWidth="317.0">
+         <children>
+            <Button alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Cancel" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Confirm Delete" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
