@@ -4,9 +4,15 @@ import com.resources.library.models.Book;
 import com.resources.library.services.BookService;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.collections.ObservableList;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class MainController {
     @FXML
@@ -34,5 +40,32 @@ public class MainController {
 
         bookList = FXCollections.observableArrayList(bookService.getAllBooks());
         tableView.setItems(bookList);
+    }
+
+    @FXML
+    public void onDelete(){
+        Book selectedBook = tableView.getSelectionModel().getSelectedItem();
+
+        if (selectedBook == null){
+            System.out.println("Select a book first");
+        }
+
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/resources/library/views/delete-view.fxml"));
+            Parent root = loader.load();
+
+            DeleteController deleteController = loader.getController();
+            deleteController.setData(selectedBook, bookService);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Delete Book");
+            stage.showAndWait();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

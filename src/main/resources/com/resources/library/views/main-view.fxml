@@ -18,6 +18,7 @@
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
             <Button mnemonicParsing="false" text="Add Book" />
+            <Button onAction="#onDelete" text="Delete" />
          </children>
       </HBox>
    </children>
