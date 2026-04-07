@@ -17,8 +17,9 @@
       </TableView>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button onAction="#onAdd" mnemonicParsing="false" text="Add Book" />
+            <Button mnemonicParsing="false" onAction="#onAdd" text="Add Book" />
             <Button onAction="#onDelete" text="Delete" />
+            <Button onAction="#onUpdate" mnemonicParsing="false" text="Update" />
          </children>
       </HBox>
    </children>

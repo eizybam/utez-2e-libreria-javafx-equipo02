@@ -93,4 +93,36 @@ public class MainController {
         }
     }
 
+    @FXML
+    public void onUpdate() {
+        Book selectedBook = tableView.getSelectionModel().getSelectedItem();
+
+        if (selectedBook == null) {
+            throw new IllegalArgumentException("Select a book first.");
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/resources/library/views/add-view.fxml")
+            );
+
+            Parent root = loader.load();
+
+            AddController controller = loader.getController();
+            controller.setBookService(bookService);
+            controller.setBookToUpdate(selectedBook);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Edit Book");
+            stage.showAndWait();
+
+            bookList.setAll(bookService.getAllBooks());
+            tableView.refresh();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
