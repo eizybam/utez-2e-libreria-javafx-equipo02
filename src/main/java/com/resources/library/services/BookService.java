@@ -81,11 +81,16 @@ public class BookService {
     }
 
 
-    public void deleteBook(Book book){
+    public void deleteBook(Book book, String isbnToDelete){
         validateBook(book);
 
-        books.remove(book);
-        bookRepository.saveBooks(books);
+        if(book.getIsbn().equals(isbnToDelete)){
+            books.remove(book);
+            bookRepository.saveBooks(books);
+            return;
+        }
+        throw new IllegalArgumentException("ISBN don't match");
+
     }
 
     public Book findByIsbn(String isbn){

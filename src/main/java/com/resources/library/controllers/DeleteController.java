@@ -5,11 +5,15 @@ import com.resources.library.services.BookService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class DeleteController {
     @FXML
     private Label lblSelectedIsbn;
+
+    @FXML
+    private TextField txtIsbnToDelete;
 
     BookService bookService;
     private Book book;
@@ -22,7 +26,7 @@ public class DeleteController {
 
     @FXML
     public void onConfirmDelete(){
-        bookService.deleteBook(book);
+        bookService.deleteBook(book,txtIsbnToDelete.getText());
         Stage stage = (Stage) lblSelectedIsbn.getScene().getWindow();
         stage.close();
     }
