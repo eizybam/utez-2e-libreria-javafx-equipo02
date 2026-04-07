@@ -9,7 +9,7 @@
       <HBox prefHeight="28.0" prefWidth="317.0">
          <children>
             <Label prefHeight="17.0" prefWidth="87.0" text="Selected ISBN:" />
-            <Label fx:id="lblSelectedIsbn" prefHeight="17.0" prefWidth="63.0" />
+            <TextField fx:id="txtSelectedIsbn" editable="false" focusTraversable="false" prefHeight="25.0" prefWidth="143.0" style="-fx-background-color: e0e0e0;" />
          </children>
       </HBox>
       <HBox prefHeight="42.0" prefWidth="317.0">
@@ -20,7 +20,7 @@
       </HBox>
       <HBox prefHeight="20.0" prefWidth="317.0">
          <children>
-            <Button onAction="#onCancelDelete" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Cancel" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#onCancelDelete" prefHeight="25.0" prefWidth="81.0" text="Cancel" />
             <Button onAction="#onConfirmDelete" prefHeight="25.0" prefWidth="107.0" text="Confirm Delete" />
          </children>
       </HBox>

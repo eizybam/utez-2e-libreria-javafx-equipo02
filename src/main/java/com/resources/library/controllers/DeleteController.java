@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class DeleteController {
     @FXML
-    private Label lblSelectedIsbn;
+    private TextField txtSelectedIsbn;
 
     @FXML
     private TextField txtIsbnToDelete;
@@ -19,7 +19,7 @@ public class DeleteController {
     private Book book;
 
     public void setData(Book selectedBook, BookService bookService){
-        this.lblSelectedIsbn.setText(selectedBook.getIsbn());
+        this.txtSelectedIsbn.setText(selectedBook.getIsbn());
         this.bookService = bookService;
         this.book = selectedBook;
     }
@@ -27,13 +27,13 @@ public class DeleteController {
     @FXML
     public void onConfirmDelete(){
         bookService.deleteBook(book,txtIsbnToDelete.getText());
-        Stage stage = (Stage) lblSelectedIsbn.getScene().getWindow();
+        Stage stage = (Stage) txtSelectedIsbn.getScene().getWindow();
         stage.close();
     }
 
     @FXML
     public void onCancelDelete(){
-        Stage stage = (Stage) lblSelectedIsbn.getScene().getWindow();
+        Stage stage = (Stage) txtSelectedIsbn.getScene().getWindow();
         stage.close();
     }
 }
