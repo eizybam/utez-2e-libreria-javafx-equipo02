@@ -19,6 +19,7 @@
          <children>
             <Button mnemonicParsing="false" onAction="#onAdd" text="Add Book" />
             <Button onAction="#onDelete" text="Delete" />
+            <Button onAction="#onUpdate" mnemonicParsing="false" text="Update" />
          </children>
       </HBox>
    </children>
