@@ -58,7 +58,7 @@ public class MainController {
             Parent root = loader.load();
 
             DeleteController deleteController = loader.getController();
-            deleteController.setData(selectedBook, bookService);
+            deleteController.setData(selectedBook, bookService, selectedBook.getIsbn());
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
