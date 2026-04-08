@@ -4,6 +4,7 @@ import com.resources.library.models.Book;
 import com.resources.library.services.BookService;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -66,7 +67,7 @@ public class AddController {
 
         }
         catch(IllegalArgumentException e){
-            System.out.println("Error adding book: " + e.getMessage());
+             MainController.showAlert("Error adding book: " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 

@@ -7,10 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.collections.ObservableList;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -26,9 +23,11 @@ public class MainController {
     @FXML private TableColumn<Book, String> yearColumn;
     @FXML private TableColumn<Book, String> genreColumn;
     @FXML private TableColumn<Book, Boolean> availableColumn;
+    @FXML private TextField txtSearch;
 
     private BookService bookService;
     private ObservableList<Book> bookList;
+    private Book searchedBook;
 
     @FXML
     public void initialize(){
@@ -47,30 +46,34 @@ public class MainController {
 
     @FXML
     public void onDelete(){
-        Book selectedBook = tableView.getSelectionModel().getSelectedItem();
-
-        if (selectedBook == null){
-            System.out.println("Select a book first");
-            return;
-        }
-
-
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/resources/library/views/delete-view.fxml"));
-            Parent root = loader.load();
+            Book selectedBook = tableView.getSelectionModel().getSelectedItem();
 
-            DeleteController deleteController = loader.getController();
-            deleteController.setData(selectedBook, bookService, selectedBook.getIsbn());
+            if (selectedBook == null) {
+                throw new IllegalArgumentException("Select a book first.");
+            }
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Delete Book");
-            stage.showAndWait();
 
-            bookList.setAll(bookService.getAllBooks());
-            tableView.refresh();
-        } catch (Exception e) {
-            e.printStackTrace();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/resources/library/views/delete-view.fxml"));
+                Parent root = loader.load();
+
+                DeleteController deleteController = loader.getController();
+                deleteController.setData(selectedBook, bookService, selectedBook.getIsbn());
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Delete Book");
+                stage.showAndWait();
+
+                bookList.setAll(bookService.getAllBooks());
+                tableView.refresh();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        catch (Exception e){
+            showAlert(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -90,6 +93,9 @@ public class MainController {
 
             bookList.setAll(bookService.getAllBooks());
             tableView.refresh();
+
+            showAlert("Book added successfully!", Alert.AlertType.INFORMATION);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -97,58 +103,75 @@ public class MainController {
 
     @FXML
     public void onUpdate() {
-        Book selectedBook = tableView.getSelectionModel().getSelectedItem();
-
-        if (selectedBook == null) {
-            throw new IllegalArgumentException("Select a book first.");
-        }
-
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/resources/library/views/add-view.fxml")
-            );
+            Book selectedBook = tableView.getSelectionModel().getSelectedItem();
 
-            Parent root = loader.load();
+            if (selectedBook == null) {
+                throw new IllegalArgumentException("Select a book first.");
+            }
 
-            AddController controller = loader.getController();
-            controller.setBookService(bookService);
-            controller.setBookToUpdate(selectedBook);
+            try {
+                FXMLLoader loader = new FXMLLoader(
+                        getClass().getResource("/com/resources/library/views/add-view.fxml")
+                );
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Edit Book");
-            stage.showAndWait();
+                Parent root = loader.load();
 
-            bookList.setAll(bookService.getAllBooks());
-            tableView.refresh();
+                AddController controller = loader.getController();
+                controller.setBookService(bookService);
+                controller.setBookToUpdate(selectedBook);
 
-        } catch (Exception e) {
-            e.printStackTrace();
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Edit Book");
+                stage.showAndWait();
+
+                bookList.setAll(bookService.getAllBooks());
+                tableView.refresh();
+
+                showAlert("Book updated successfully!", Alert.AlertType.INFORMATION);
+
+            } catch (Exception e) {
+                showAlert("Error opening edit window: " + e.getMessage(), Alert.AlertType.ERROR);
+            }
+        } catch (Exception e){
+            showAlert(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
     @FXML
-    public void onViewDetails(){
-        Book selectedBook = tableView.getSelectionModel().getSelectedItem();
+    public void onViewDetails() {
+        try {
+            Book selectedBook;
 
-        if (selectedBook == null) {
-            throw new IllegalArgumentException("Select a book first.");
+            if (this.searchedBook != null) {
+                selectedBook = this.searchedBook;
+            } else {
+                selectedBook = tableView.getSelectionModel().getSelectedItem();
+            }
+
+            if (selectedBook == null) {
+                throw new IllegalArgumentException("Select a book first.");
+            }
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/resources/library/views/details-view.fxml"));
+                Parent root = loader.load();
+
+                DetailsController controller = loader.getController();
+                controller.setBookDetails(selectedBook);
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Book details");
+                stage.showAndWait();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/resources/library/views/details-view.fxml"));
-            Parent root = loader.load();
-
-            DetailsController controller = loader.getController();
-            controller.setBookDetails(selectedBook);
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Book details");
-            stage.showAndWait();
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        catch (Exception e){
+            showAlert(e.getMessage(), Alert.AlertType.ERROR);
         }
 
     }
@@ -171,20 +194,42 @@ public class MainController {
             try{
                 bookService.exportReport(choosedDocument);
 
-                showAlert("Report saved on path: " + choosedDocument.getName(), Alert.AlertType.INFORMATION);
+                showAlert("Report saved on path: " + choosedDocument.getAbsolutePath(), Alert.AlertType.INFORMATION);
             } catch (Exception e){
                 showAlert("Error, couldn't save report: " + e.getMessage(), Alert.AlertType.ERROR);
             }
         }
     }
 
-    private void showAlert(String message, Alert.AlertType type) {
+    public static void showAlert(String message, Alert.AlertType type) {
         Alert alert = new Alert(type);
 
         alert.setTitle(type == Alert.AlertType.INFORMATION ? "Success" : "Error");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    public void onSearch(){
+        try {
+            String isbnSearched = txtSearch.getText();
+
+            if (isbnSearched.isBlank()){
+                throw new IllegalArgumentException("Enter an ISBN to search");
+            }
+
+            this.searchedBook = bookService.findByIsbn(isbnSearched);
+
+            if (this.searchedBook == null){
+                throw new IllegalArgumentException("Book with this ISBN doesn't exist");
+            }
+
+            onViewDetails();
+        }
+        catch (IllegalArgumentException e){
+            showAlert(e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
 }

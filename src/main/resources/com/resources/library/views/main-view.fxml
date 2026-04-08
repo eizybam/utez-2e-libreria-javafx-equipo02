@@ -5,6 +5,11 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="453.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.resources.library.controllers.MainController">
    <children>
+      <HBox prefHeight="39.0" prefWidth="453.0">
+         <children>
+            <TextField fx:id="txtSearch" prefWidth="313.0" />
+            <Button onAction="#onSearch" prefHeight="25.0" prefWidth="99.0" text="Search by ISBN" />
+         </children></HBox>
       <TableView fx:id="tableView" prefHeight="200.0" prefWidth="449.0">
         <columns>
           <TableColumn fx:id="isbnColumn" prefWidth="75.0" text="ISBN" />
