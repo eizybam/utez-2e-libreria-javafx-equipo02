@@ -3,6 +3,9 @@ package com.resources.library.services;
 import com.resources.library.models.Book;
 import com.resources.library.repositories.BookRepository;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.List;
 
 public class BookService {
@@ -90,6 +93,22 @@ public class BookService {
             return;
         }
         throw new IllegalArgumentException("ISBN don't match");
+    }
+
+    public void viewBookDetails(Book bookDetails){
+        validateBook(bookDetails);
+
+        Book viewDetails = findByIsbn(bookDetails.getIsbn());
+
+        if(bookDetails == null){
+            throw new IllegalArgumentException("Book with this ISBN doesn't exists");
+        }
+        viewDetails.setAuthor(bookDetails.getAuthor());
+        viewDetails.setIsbn(bookDetails.getIsbn());
+        viewDetails.setGenre(bookDetails.getGenre());
+        viewDetails.setTitle(bookDetails.getTitle());
+        viewDetails.setYearPublished(bookDetails.getYearPublished());
+        viewDetails.setAvailable(bookDetails.isAvailable());
 
     }
 
@@ -100,6 +119,27 @@ public class BookService {
             }
         }
         return null;
+    }
+
+    public void exportReport(File file){
+        try (PrintWriter writer = new PrintWriter(new FileWriter(file))){
+            writer.println("ISBN, Title, Author, Year Published, Genre, Available");
+
+            for (Book book : books){
+                String available = book.isAvailable() ? "Yes" : "No";
+
+                writer.println(
+                        book.getIsbn() + "," +
+                        book.getTitle() + "," +
+                        book.getAuthor() + "," +
+                        book.getYearPublished() + "," +
+                        book.getGenre() + "," +
+                        available);
+            }
+
+        } catch (Exception e){
+            throw new RuntimeException("Error trying to export: " + e.getMessage());
+        }
     }
 
 }

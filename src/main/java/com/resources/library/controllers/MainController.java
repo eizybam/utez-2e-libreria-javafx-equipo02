@@ -7,10 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.collections.ObservableList;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -123,6 +125,66 @@ public class MainController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    public void onViewDetails(){
+        Book selectedBook = tableView.getSelectionModel().getSelectedItem();
+
+        if (selectedBook == null) {
+            throw new IllegalArgumentException("Select a book first.");
+        }
+
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/resources/library/views/details-view.fxml"));
+            Parent root = loader.load();
+
+            DetailsController controller = loader.getController();
+            controller.setBookDetails(selectedBook);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Book details");
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    public void onExport(){
+        javafx.stage.FileChooser selector = new javafx.stage.FileChooser();
+
+        selector.setTitle("Where do you want to download the report?");
+        selector.setInitialFileName("report_books.csv");
+
+        selector.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("CSV Document", "*.csv")
+        );
+
+        javafx.stage.Window currentWindow = tableView.getScene().getWindow();
+        java.io.File choosedDocument = selector.showSaveDialog(currentWindow);
+
+        if(choosedDocument != null){
+            try{
+                bookService.exportReport(choosedDocument);
+
+                showAlert("Report saved on path: " + choosedDocument.getName(), Alert.AlertType.INFORMATION);
+            } catch (Exception e){
+                showAlert("Error, couldn't save report: " + e.getMessage(), Alert.AlertType.ERROR);
+            }
+        }
+    }
+
+    private void showAlert(String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+
+        alert.setTitle(type == Alert.AlertType.INFORMATION ? "Success" : "Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 }

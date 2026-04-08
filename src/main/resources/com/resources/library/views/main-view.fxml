@@ -19,7 +19,9 @@
          <children>
             <Button mnemonicParsing="false" onAction="#onAdd" text="Add Book" />
             <Button onAction="#onDelete" text="Delete" />
-            <Button onAction="#onUpdate" mnemonicParsing="false" text="Update" />
+            <Button mnemonicParsing="false" onAction="#onUpdate" text="Update" />
+            <Button mnemonicParsing="false" onAction="#onViewDetails" text="View Details" />
+            <Button mnemonicParsing="false" onAction="#onExport" text="Export File" />
          </children>
       </HBox>
    </children>
