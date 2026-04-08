@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="453.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.resources.library.controllers.MainController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="347.0" prefWidth="627.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.resources.library.controllers.MainController">
    <children>
-      <HBox prefHeight="39.0" prefWidth="453.0">
+      <HBox alignment="CENTER" prefHeight="39.0" prefWidth="453.0" spacing="20.0">
          <children>
-            <TextField fx:id="txtSearch" prefWidth="313.0" />
+            <TextField fx:id="txtSearch" prefWidth="313.0" promptText="ISBN" />
             <Button onAction="#onSearch" prefHeight="25.0" prefWidth="99.0" text="Search by ISBN" />
          </children></HBox>
-      <TableView fx:id="tableView" prefHeight="200.0" prefWidth="449.0">
+      <TableView fx:id="tableView" prefHeight="253.0" prefWidth="637.0">
         <columns>
-          <TableColumn fx:id="isbnColumn" prefWidth="75.0" text="ISBN" />
-          <TableColumn fx:id="titleColumn" prefWidth="75.0" text="Title" />
-            <TableColumn fx:id="authorColumn" prefWidth="75.0" text="Author" />
-            <TableColumn fx:id="yearColumn" prefWidth="75.0" text="Year Published" />
-            <TableColumn fx:id="genreColumn" prefWidth="75.0" text="Genre" />
-            <TableColumn fx:id="availableColumn" prefWidth="75.0" text="Available" />
+          <TableColumn fx:id="isbnColumn" prefWidth="88.0" resizable="false" text="ISBN" />
+          <TableColumn fx:id="titleColumn" prefWidth="134.0" text="Title" />
+            <TableColumn fx:id="authorColumn" minWidth="0.0" prefWidth="101.0" text="Author" />
+            <TableColumn fx:id="yearColumn" prefWidth="55.0" resizable="false" text="Year" />
+            <TableColumn fx:id="genreColumn" prefWidth="90.0" resizable="false" text="Genre" />
+            <TableColumn fx:id="availableColumn" prefWidth="68.0" resizable="false" text="Available" />
         </columns>
+         <VBox.margin>
+            <Insets left="15.0" right="15.0" />
+         </VBox.margin>
       </TableView>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER" prefHeight="35.0" prefWidth="543.0" spacing="10.0">
          <children>
             <Button mnemonicParsing="false" onAction="#onAdd" text="Add Book" />
             <Button onAction="#onDelete" text="Delete" />
@@ -28,6 +32,9 @@
             <Button mnemonicParsing="false" onAction="#onViewDetails" text="View Details" />
             <Button mnemonicParsing="false" onAction="#onExport" text="Export File" />
          </children>
+         <padding>
+            <Insets top="15.0" />
+         </padding>
       </HBox>
    </children>
 </VBox>

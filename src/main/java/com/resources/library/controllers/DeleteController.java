@@ -4,6 +4,7 @@ import com.resources.library.models.Book;
 import com.resources.library.services.BookService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -38,8 +39,10 @@ public class DeleteController {
     @FXML
     public void onConfirmDelete(){
         bookService.deleteBook(book,txtIsbnToDelete.getText());
+        MainController.showAlert("Book deleted successfully.", Alert.AlertType.INFORMATION);
         Stage stage = (Stage) txtSelectedIsbn.getScene().getWindow();
         stage.close();
+
     }
 
     @FXML
@@ -48,8 +51,5 @@ public class DeleteController {
         stage.close();
     }
 
-    public void setData(BookService service, String isbn) {
-
-    }
 
 }

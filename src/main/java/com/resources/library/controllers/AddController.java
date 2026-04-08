@@ -62,6 +62,7 @@ public class AddController {
 
                 service.updateBook(updatedBook);
             }
+            MainController.showAlert("Book saved successfully.", Alert.AlertType.INFORMATION);
             Stage stage = (Stage) txtIsbn.getScene().getWindow();
             stage.close();
 

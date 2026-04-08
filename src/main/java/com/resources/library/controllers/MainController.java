@@ -42,6 +42,8 @@ public class MainController {
 
         bookList = FXCollections.observableArrayList(bookService.getAllBooks());
         tableView.setItems(bookList);
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
     }
 
     @FXML
@@ -69,7 +71,7 @@ public class MainController {
                 bookList.setAll(bookService.getAllBooks());
                 tableView.refresh();
             } catch (Exception e) {
-                e.printStackTrace();
+                showAlert("Error opening delete confirmation window: " + e.getMessage(), Alert.AlertType.ERROR);
             }
         }
         catch (Exception e){
@@ -94,10 +96,8 @@ public class MainController {
             bookList.setAll(bookService.getAllBooks());
             tableView.refresh();
 
-            showAlert("Book added successfully!", Alert.AlertType.INFORMATION);
-
         } catch (IOException e) {
-            e.printStackTrace();
+            showAlert("Error opening add book window: " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
@@ -129,7 +129,6 @@ public class MainController {
                 bookList.setAll(bookService.getAllBooks());
                 tableView.refresh();
 
-                showAlert("Book updated successfully!", Alert.AlertType.INFORMATION);
 
             } catch (Exception e) {
                 showAlert("Error opening edit window: " + e.getMessage(), Alert.AlertType.ERROR);
