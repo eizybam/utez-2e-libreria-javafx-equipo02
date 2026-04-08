@@ -33,7 +33,7 @@ public class AddController {
     private Book updatedBook;
 
 
-    String[] genreOptions = {"Science Fiction"};
+    String[] genreOptions = {"Science Fiction", "Horror", "Comedy", "Drama", "Fantasy", "Romance", "Thriller", "Classic"};
     public void initialize(){
         this.cbGenreFilter.getItems().addAll(genreOptions);
     }
