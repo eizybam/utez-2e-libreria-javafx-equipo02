@@ -5,7 +5,7 @@ Desktop CRUD application built with JavaFX to manage a school library catalog wi
 ## Table of Contents
 
 - [English Version](#english-version)
-- [Version en Español](#version-en-espanol)
+- [Versión en Español](#version-en-espanol)
 
 ---
 
@@ -184,7 +184,7 @@ Desarrollar una aplicacion de escritorio en JavaFX con:
 - Persistencia en archivo local
 - Estructura POO basica (modelo, repositorio/servicio, controladores)
 - Validaciones de entradas
-- Manejo de errores con retroalimentacion al usuario
+- Manejo de errores con retroalimentación al usuario
 
 ### 3. Funcionalidades principales
 
@@ -248,7 +248,7 @@ Desarrollar una aplicacion de escritorio en JavaFX con:
 #### Pantalla de detalle
 
 - Muestra información completa del libro seleccionado
-- Boton para regresar/salir
+- Botón para regresar/salir
 
 ### 5. Estructura del proyecto
 
@@ -304,7 +304,7 @@ Ejecutar desde la raíz del repositorio (donde esta `pom.xml`).
 
 #### Reporte exportado
 
-- Se genera desde el boton **Export File** en la vista principal.
+- Se genera desde el botón **Export File** en la vista principal.
 - El usuario elige ruta y nombre del archivo con un selector.
 - Se exporta un CSV con todos los libros actuales del catálogo.
 

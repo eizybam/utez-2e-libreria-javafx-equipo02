@@ -167,7 +167,7 @@ public class MainController {
                 stage.showAndWait();
 
             } catch (IOException e) {
-                e.printStackTrace();
+                showAlert("Error opening details window: " + e.getMessage(), Alert.AlertType.ERROR);
             }
         }
         catch (Exception e){
