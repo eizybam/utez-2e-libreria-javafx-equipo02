@@ -145,6 +145,7 @@ public class MainController {
 
             if (this.searchedBook != null) {
                 selectedBook = this.searchedBook;
+                this.searchedBook = null; // Reset the variable after each search
             } else {
                 selectedBook = tableView.getSelectionModel().getSelectedItem();
             }
