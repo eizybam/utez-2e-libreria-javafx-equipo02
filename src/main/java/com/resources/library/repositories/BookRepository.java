@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.resources.library.controllers.MainController;
 import com.resources.library.models.Book;
 
 /**
@@ -36,20 +37,20 @@ public class BookRepository {
 
                 if (data.length == 6){
                     Book book = new Book(
-                        data[0], // ISBN
-                        data[1], // Title
-                        data[2], // Author
-                        data[3], // Year Published
-                        data[4], // Genre
-                        Boolean.parseBoolean(data[5]) // Available
+                            data[0], // ISBN
+                            data[1], // Title
+                            data[2], // Author
+                            data[3], // Year Published
+                            data[4], // Genre
+                            Boolean.parseBoolean(data[5]) // Available
                     );
                     books.add(book);
                 }
             }
         }
         catch (IOException e){
-            e.printStackTrace();
-    }
+            MainController.showAlert("Error loading books: " + e.getMessage(), javafx.scene.control.Alert.AlertType.ERROR);
+        }
         return books;
     }
 
@@ -75,7 +76,7 @@ public class BookRepository {
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            MainController.showAlert("Error saving books: " + e.getMessage(), javafx.scene.control.Alert.AlertType.ERROR);
         }
     }
 
