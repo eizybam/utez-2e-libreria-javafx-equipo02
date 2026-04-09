@@ -27,10 +27,10 @@
       <HBox alignment="CENTER" prefHeight="35.0" prefWidth="543.0" spacing="10.0">
          <children>
             <Button mnemonicParsing="false" onAction="#onAdd" text="Add Book" />
-            <Button onAction="#onDelete" text="Delete" />
+            <Button onAction="#onDelete" text="Delete" textFill="#9e1010" />
             <Button mnemonicParsing="false" onAction="#onUpdate" text="Update" />
             <Button mnemonicParsing="false" onAction="#onViewDetails" text="View Details" />
-            <Button mnemonicParsing="false" onAction="#onExport" text="Export File" />
+            <Button mnemonicParsing="false" onAction="#onExport" text="Export File" textFill="#49a621" />
          </children>
          <padding>
             <Insets top="15.0" />
