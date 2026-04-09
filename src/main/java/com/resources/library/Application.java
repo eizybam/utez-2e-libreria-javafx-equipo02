@@ -6,7 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Main JavaFX application that loads the system's initial window.
+ */
 public class Application extends javafx.application.Application {
+    /**
+     * Starts the application and shows the main catalog screen.
+     * @param stage -> Primary JavaFX stage
+     * @throws IOException -> Thrown if the main view cannot be loaded
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("views/main-view.fxml"));

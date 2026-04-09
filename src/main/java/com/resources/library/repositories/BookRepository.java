@@ -11,9 +11,16 @@ import java.util.List;
 
 import com.resources.library.models.Book;
 
+/**
+ * Repository responsible for loading and saving books in a local CSV file.
+ */
 public class BookRepository {
     private final String FILE_PATH = "books.csv";
 
+    /**
+     * Loads all books stored in the local file.
+     * @return List<Book> -> List of books read from the file
+     */
     public List<Book> loadBooks(){
         List<Book> books = new ArrayList<>();
 
@@ -46,6 +53,10 @@ public class BookRepository {
         return books;
     }
 
+    /**
+     * Saves the full book list to the local file.
+     * @param books -> List of books to persist
+     */
     public void saveBooks(List<Book> books) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_PATH))) {
 

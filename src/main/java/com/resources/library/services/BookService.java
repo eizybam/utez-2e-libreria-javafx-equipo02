@@ -1,26 +1,46 @@
 package com.resources.library.services;
 
-import com.resources.library.models.Book;
-import com.resources.library.repositories.BookRepository;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.List;
 
+import com.resources.library.models.Book;
+import com.resources.library.repositories.BookRepository;
+
+/**
+ * Service that contains the business logic for the book catalog.
+ */
 public class BookService {
     private BookRepository bookRepository;
     private List<Book> books;
 
+    /**
+     * Creates the service and loads the catalog from the local repository.
+     */
     public BookService(){
         bookRepository = new BookRepository();
         books = bookRepository.loadBooks();
     }
 
+    /**
+     * Gets the full catalog in memory.
+     * @return List<Book> -> Current list of books
+     */
     public List<Book> getAllBooks() {
         return books;
     }
 
+    /**
+     * Adds a new book to the catalog after validating its data.
+     * @param isbn -> ISBN or unique identifier of the book
+     * @param title -> Book title
+     * @param author -> Book author
+     * @param yearPublished -> Publication year of the book
+     * @param genre -> Book genre
+     * @param available -> Availability status of the book
+     * @throws IllegalArgumentException -> Thrown if the book already exists or the data is invalid
+     */
     public void addBook(String isbn, String title, String author, String yearPublished, String genre, Boolean available) {
 
         if (findByIsbn(isbn) != null){
@@ -35,6 +55,11 @@ public class BookService {
 
     }
 
+    /**
+     * Updates an existing book with the new received data.
+     * @param updatedBook -> Book with updated information
+     * @throws IllegalArgumentException -> Thrown if the book does not exist or the data is invalid
+     */
     public void updateBook(Book updatedBook){
         validateBook(updatedBook);
 
@@ -54,6 +79,11 @@ public class BookService {
 
     }
 
+    /**
+     * Validates that a book meets the system business rules.
+     * @param book -> Book to validate
+     * @throws IllegalArgumentException -> Thrown if any value does not meet the rules
+     */
     private void validateBook(Book book) {
 
         if (book.getIsbn().length() != 10) {
@@ -84,6 +114,12 @@ public class BookService {
     }
 
 
+    /**
+     * Deletes a book from the catalog if the ISBN matches the confirmed value.
+     * @param book -> Book selected for deletion
+     * @param isbnToDelete -> ISBN retyped by the user to confirm the action
+     * @throws IllegalArgumentException -> Thrown if the ISBN does not match or the data is invalid
+     */
     public void deleteBook(Book book, String isbnToDelete){
         validateBook(book);
 
@@ -95,6 +131,11 @@ public class BookService {
         throw new IllegalArgumentException("ISBN don't match");
     }
 
+    /**
+     * Prepares a book's information to be shown in the detail view.
+     * @param bookDetails -> Book whose information will be displayed
+     * @throws IllegalArgumentException -> Thrown if the book does not exist or the data is invalid
+     */
     public void viewBookDetails(Book bookDetails){
         validateBook(bookDetails);
 
@@ -112,6 +153,11 @@ public class BookService {
 
     }
 
+    /**
+     * Searches for a book by its ISBN in the in-memory catalog.
+     * @param isbn -> ISBN of the book to search
+     * @return Book -> Found book or null if it does not exist
+     */
     public Book findByIsbn(String isbn){
         for (Book book: books){
             if (isbn.equals(book.getIsbn())){
@@ -121,6 +167,10 @@ public class BookService {
         return null;
     }
 
+    /**
+     * Exports the current catalog to a CSV file.
+     * @param file -> Destination file for the report
+     */
     public void exportReport(File file){
         try (PrintWriter writer = new PrintWriter(new FileWriter(file))){
             writer.println("ISBN, Title, Author, Year Published, Genre, Available");

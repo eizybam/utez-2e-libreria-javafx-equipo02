@@ -10,6 +10,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * Controller for the form used to register and edit books.
+ */
 public class AddController {
 
     @FXML
@@ -35,10 +38,16 @@ public class AddController {
 
 
     String[] genreOptions = {"Science Fiction", "Horror", "Comedy", "Drama", "Fantasy", "Romance", "Thriller", "Classic"};
+    /**
+     * Loads the genre options into the form ComboBox.
+     */
     public void initialize(){
         this.cbGenreFilter.getItems().addAll(genreOptions);
     }
 
+    /**
+     * Saves a new book or updates the current book depending on the form mode.
+     */
     @FXML
     public void onSave(){
         try{
@@ -72,6 +81,10 @@ public class AddController {
         }
     }
 
+    /**
+     * Loads an existing book into the form for editing.
+     * @param book -> Book to edit
+     */
     public void setBookToUpdate(Book book){
         this.updatedBook = book;
 
@@ -86,12 +99,19 @@ public class AddController {
     }
 
 
+    /**
+     * Closes the form without saving changes.
+     */
     @FXML
     public void onCancelAdd(){
         Stage stage = (Stage) txtIsbn.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Injects the service used by the form to persist changes.
+     * @param service -> Book service
+     */
     public void setBookService(BookService service){
         this.service =  service;
     }

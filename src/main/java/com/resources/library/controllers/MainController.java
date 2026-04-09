@@ -1,19 +1,26 @@
 package com.resources.library.controllers;
 
+import java.io.IOException;
+
 import com.resources.library.models.Book;
 import com.resources.library.services.BookService;
+
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
+/**
+ * Controller for the main book catalog screen.
+ */
 public class MainController {
     @FXML
     private TableView<Book> tableView;
@@ -29,6 +36,9 @@ public class MainController {
     private ObservableList<Book> bookList;
     private Book searchedBook;
 
+    /**
+     * Initializes the main table and loads books from the service.
+     */
     @FXML
     public void initialize(){
         bookService = new BookService();
@@ -46,6 +56,9 @@ public class MainController {
 
     }
 
+    /**
+     * Opens the confirmation window to delete the selected book.
+     */
     @FXML
     public void onDelete(){
         try {
@@ -79,6 +92,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Opens the window to register a new book.
+     */
     @FXML
     public void onAdd(){
         try {
@@ -101,6 +117,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Opens the edit window for the selected book.
+     */
     @FXML
     public void onUpdate() {
         try {
@@ -138,6 +157,9 @@ public class MainController {
         }
     }
 
+    /**
+     * Opens the detail view for the selected book or the book found by ISBN.
+     */
     @FXML
     public void onViewDetails() {
         try {
@@ -145,7 +167,7 @@ public class MainController {
 
             if (this.searchedBook != null) {
                 selectedBook = this.searchedBook;
-                this.searchedBook = null; // Reset the variable after each search
+                this.searchedBook = null; // Reset after each search
             } else {
                 selectedBook = tableView.getSelectionModel().getSelectedItem();
             }
@@ -176,6 +198,9 @@ public class MainController {
 
     }
 
+    /**
+     * Exports the current catalog to a CSV file chosen by the user.
+     */
     @FXML
     public void onExport(){
         javafx.stage.FileChooser selector = new javafx.stage.FileChooser();
@@ -201,6 +226,11 @@ public class MainController {
         }
     }
 
+    /**
+     * Shows an information or error alert according to the received type.
+     * @param message -> Message to display
+     * @param type -> JavaFX alert type
+     */
     public static void showAlert(String message, Alert.AlertType type) {
         Alert alert = new Alert(type);
 
@@ -210,6 +240,9 @@ public class MainController {
         alert.showAndWait();
     }
 
+    /**
+     * Searches for a book by ISBN and, if found, opens its detail view.
+     */
     @FXML
     public void onSearch(){
         try {
