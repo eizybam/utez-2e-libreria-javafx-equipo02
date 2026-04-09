@@ -238,7 +238,7 @@ Desarrollar una aplicacion de escritorio en JavaFX con:
   - ISBN
   - Titulo
   - Autor
-  - Anio
+  - Año
   - Genero
   - Disponible
 - Botones:
